@@ -1,4 +1,5 @@
 import com.cabinvoice.Fare;
+import com.cabinvoice.Invoice;
 import com.cabinvoice.Rides;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,8 +23,16 @@ public class FareTest {
 
     @Test
     public void givenMultipleRides_ShouldReturnTotalFare_ForJourney() {
-        Rides[] rides = {new Rides(40.2,23), new Rides(5.9, 10)};
+        Rides[] rides = {new Rides(40.2, 23), new Rides(5.9, 10)};
         double totalFare = fare.getFare(rides);
         Assert.assertEquals(494.0, totalFare, 0);
+    }
+
+    @Test
+    public void givenMultipleRides_ShouldReturnInvoice_ForJourney() {
+        Rides[] rides = {new Rides(40.2, 23), new Rides(5.9, 10)};
+        Invoice invoiceActual = fare.getInvoice(rides);
+        Invoice invoiceExpected = new Invoice(2, 494.0);
+        Assert.assertEquals(invoiceExpected, invoiceActual);
     }
 }
