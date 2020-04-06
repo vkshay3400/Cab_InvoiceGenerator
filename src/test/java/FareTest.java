@@ -47,13 +47,15 @@ public class FareTest {
     }
 
     @Test
-    public void givenMultipleRides_ShouldReturnInvoiceSummery_ForJourney() {
+    public void givenMultipleRides_ShouldReturnInvoiceSummary_ForJourney() {
         Rides[] rides = {new Rides(40.2, 23),
-                new Rides(5.9, 10)
+                         new Rides(5.9, 10),
+                         new Rides(27.0, 19),
+                         new Rides(45.5, 34),
         };
         fare.addRides("user1", rides);
         Invoice invoiceActual = fare.getInvoice(rides);
-        Invoice invoiceExpected = new Invoice(2, 494.0);
+        Invoice invoiceExpected = new Invoice(4, 1272.0);
         Assert.assertEquals(invoiceExpected, invoiceActual);
     }
 }
