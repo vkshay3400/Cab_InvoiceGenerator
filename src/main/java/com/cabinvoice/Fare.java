@@ -14,6 +14,12 @@ public class Fare {
         return Math.max(MINIMUM_TRAVEL_COST, fare);
     }
 
+    //METHOD TO GET INVOICE
+    public Invoice getInvoice(Rides[] multiRides) {
+        double totalFare = getFare(multiRides);
+        return new Invoice(multiRides.length, totalFare);
+    }
+
     //MAIN METHOD
     public static void main(String[] args) {
         System.out.println("Welcome to cab invoice");
