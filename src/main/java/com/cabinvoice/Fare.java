@@ -20,6 +20,12 @@ public class Fare {
         return new Invoice(multiRides.length, totalFare);
     }
 
+    //METHOD TO ADD RIDES
+    public void addRides(String userId, Rides[] rides) {
+        RideRepository rideRepository = new RideRepository();
+        rideRepository.addRide(userId, rides);
+    }
+
     //MAIN METHOD
     public static void main(String[] args) {
         System.out.println("Welcome to cab invoice");
