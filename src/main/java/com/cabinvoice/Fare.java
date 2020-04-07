@@ -1,33 +1,53 @@
 package com.cabinvoice;
 
-public class Fare {
+public class CabFare {
     //CONSTANTS
-    public static final double DISTANCE_COST_PER_KM = 10;
-    public static final double TRAVEL_COST_PER_MIN = 1;
-    public static final int MINIMUM_TRAVEL_COST = 5;
+    private static double DISTANCE_COST_PER_KILOMETER;
+    private static int TRAVEL_COST_PER_MINUTE;
+    private static double MINIMUM_TRAVEL_COST;
 
-    //METHOD TO GET TOTAL FARE
-    public double getFare(Rides[] multiRides) {
-        double fare = 0;
-        for (Rides ride : multiRides)
-            fare += ride.journeyInDistance * DISTANCE_COST_PER_KM + ride.journeyInTime * TRAVEL_COST_PER_MIN;
+    //NEW OBJECT
+    RideRepository rideRepository = new RideRepository();
+
+    //CONSTRUCTOR
+    public CabFare() {
+        this.rideRepository = new RideRepository();
+    }
+
+    //METHOD TO GET FARE
+    public double getFare(RideType rideType, double distance, int time) {
+        setRideValue(rideType);
+        double fare = distance * DISTANCE_COST_PER_KILOMETER + time * TRAVEL_COST_PER_MINUTE;
         return Math.max(MINIMUM_TRAVEL_COST, fare);
     }
 
+    //METHOD FOR RIDE TYPE
+    private void setRideValue(RideType rideType) {
+        DISTANCE_COST_PER_KILOMETER = rideType.costPerKilometer;
+        TRAVEL_COST_PER_MINUTE = rideType.costPerMinute;
+        MINIMUM_TRAVEL_COST = rideType.minimumFare;
+    }
+
     //METHOD TO GET INVOICE
-    public Invoice getInvoice(Rides[] multiRides) {
-        double totalFare = getFare(multiRides);
-        return new Invoice(multiRides.length, totalFare);
+    public Invoice getInvoice(String userId) {
+        return invoiceGenerator(rideRepository.getRideList(userId));
     }
 
     //METHOD TO ADD RIDES
     public void addRides(String userId, Rides[] rides) {
-        RideRepository rideRepository = new RideRepository();
         rideRepository.addRide(userId, rides);
+    }
+
+    //METHOD TO GENERATE INVOICE
+    public Invoice invoiceGenerator(Rides[] multiRides) {
+        double totalFare = 0;
+        for (Rides rides : multiRides) {
+            totalFare += getFare(rides.rideType, rides.cabServiceInDistance, rides.cabServiceInTime);
+        }
+        return new Invoice(multiRides.length, totalFare);
     }
 
     //MAIN METHOD
     public static void main(String[] args) {
-        System.out.println("Welcome to cab invoice");
     }
 }
