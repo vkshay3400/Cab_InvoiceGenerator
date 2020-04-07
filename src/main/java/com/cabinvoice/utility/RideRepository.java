@@ -1,4 +1,6 @@
-package com.cabinvoice;
+package com.cabinvoice.utility;
+
+import com.cabinvoice.service.Rides;
 
 import java.util.*;
 

@@ -1,6 +1,10 @@
-package com.cabinvoice;
+package com.cabinvoice.service;
 
-public class Fare {
+import com.cabinvoice.utility.CabInvoice;
+import com.cabinvoice.utility.RideRepository;
+import com.cabinvoice.utility.RideType;
+
+public class CabFareGenerator {
     //CONSTANTS
     private static double DISTANCE_COST_PER_KILOMETER;
     private static int TRAVEL_COST_PER_MINUTE;
@@ -10,7 +14,7 @@ public class Fare {
     RideRepository rideRepository = new RideRepository();
 
     //CONSTRUCTOR
-    public Fare() {
+    public CabFareGenerator() {
         this.rideRepository = new RideRepository();
     }
 
@@ -29,7 +33,7 @@ public class Fare {
     }
 
     //METHOD TO GET INVOICE
-    public Invoice getInvoice(String userId) {
+    public CabInvoice getInvoice(String userId) {
         return invoiceGenerator(rideRepository.getRideList(userId));
     }
 
@@ -39,12 +43,12 @@ public class Fare {
     }
 
     //METHOD TO GENERATE INVOICE
-    public Invoice invoiceGenerator(Rides[] multiRides) {
+    public CabInvoice invoiceGenerator(Rides[] multiRides) {
         double totalFare = 0;
         for (Rides rides : multiRides) {
             totalFare += getFare(rides.rideType, rides.cabServiceInDistance, rides.cabServiceInTime);
         }
-        return new Invoice(multiRides.length, totalFare);
+        return new CabInvoice(multiRides.length, totalFare);
     }
 
     //MAIN METHOD

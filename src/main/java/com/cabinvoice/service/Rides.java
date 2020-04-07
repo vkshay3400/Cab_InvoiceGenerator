@@ -1,4 +1,6 @@
-package com.cabinvoice;
+package com.cabinvoice.service;
+
+import com.cabinvoice.utility.RideType;
 
 public class Rides {
     public double cabServiceInDistance;

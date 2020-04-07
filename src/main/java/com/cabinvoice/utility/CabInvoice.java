@@ -1,13 +1,13 @@
-package com.cabinvoice;
+package com.cabinvoice.utility;
 
 import java.util.Objects;
 
-public class Invoice {
+public class CabInvoice {
     public int numberOfRides;
     public double totalFare;
     public double averageFarePerRides;
 
-    public Invoice(int NumberOfRides, double totalFare) {
+    public CabInvoice(int NumberOfRides, double totalFare) {
         this.numberOfRides = NumberOfRides;
         this.totalFare = totalFare;
         this.averageFarePerRides = (totalFare / NumberOfRides);
@@ -17,10 +17,10 @@ public class Invoice {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Invoice invoice = (Invoice) o;
-        return numberOfRides == invoice.numberOfRides &&
-                Double.compare(invoice.totalFare, totalFare) == 0 &&
-                Double.compare(invoice.averageFarePerRides, averageFarePerRides) == 0;
+        CabInvoice cabInvoice = (CabInvoice) o;
+        return numberOfRides == cabInvoice.numberOfRides &&
+                Double.compare(cabInvoice.totalFare, totalFare) == 0 &&
+                Double.compare(cabInvoice.averageFarePerRides, averageFarePerRides) == 0;
     }
 
     @Override

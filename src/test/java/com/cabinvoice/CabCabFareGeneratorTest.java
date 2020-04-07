@@ -1,18 +1,20 @@
-import com.cabinvoice.Fare;
-import com.cabinvoice.Invoice;
-import com.cabinvoice.RideType;
-import com.cabinvoice.Rides;
+package com.cabinvoice;
+
+import com.cabinvoice.service.CabFareGenerator;
+import com.cabinvoice.service.Rides;
+import com.cabinvoice.utility.CabInvoice;
+import com.cabinvoice.utility.RideType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FareTest {
-    Fare fare;
+public class CabCabFareGeneratorTest {
+    CabFareGenerator fare;
     double totalFare;
 
     @Before
     public void setFare() throws Exception {
-        fare = new Fare();
+        fare = new CabFareGenerator();
     }
 
     @Test
@@ -44,8 +46,8 @@ public class FareTest {
         Rides[] rides = {new Rides(RideType.NORMAL_RIDES, 40.2, 23),
                          new Rides(RideType.NORMAL_RIDES, 5.9, 10)
                         };
-        Invoice invoice = fare.invoiceGenerator(rides);
-        Assert.assertEquals(494.0, invoice.totalFare, 0.0);
+        CabInvoice cabInvoice = fare.invoiceGenerator(rides);
+        Assert.assertEquals(494.0, cabInvoice.totalFare, 0.0);
     }
 
     @Test
@@ -53,8 +55,8 @@ public class FareTest {
         Rides[] rides = {new Rides(RideType.PREMIUM_RIDES, 40.2, 23),
                          new Rides(RideType.PREMIUM_RIDES, 5.9, 10)
                         };
-        Invoice invoice = fare.invoiceGenerator(rides);
-        Assert.assertEquals(757.5, invoice.totalFare, 0.0);
+        CabInvoice cabInvoice = fare.invoiceGenerator(rides);
+        Assert.assertEquals(757.5, cabInvoice.totalFare, 0.0);
     }
 
     @Test
@@ -64,9 +66,9 @@ public class FareTest {
                          new Rides(RideType.NORMAL_RIDES, 5.9, 10)
                         };
         fare.addRides(userId, rides);
-        Invoice invoiceActual = fare.getInvoice(userId);
-        Invoice invoiceExpected = new Invoice(2, 494.0);
-        Assert.assertEquals(invoiceExpected, invoiceActual);
+        CabInvoice cabInvoiceActual = fare.getInvoice(userId);
+        CabInvoice cabInvoiceExpected = new CabInvoice(2, 494.0);
+        Assert.assertEquals(cabInvoiceExpected, cabInvoiceActual);
     }
 
     @Test
@@ -76,9 +78,9 @@ public class FareTest {
                          new Rides(RideType.PREMIUM_RIDES, 5.9, 10)
                         };
         fare.addRides(userId, rides);
-        Invoice invoiceActual = fare.getInvoice(userId);
-        Invoice invoiceExpected = new Invoice(2, 757.5);
-        Assert.assertEquals(invoiceExpected, invoiceActual);
+        CabInvoice cabInvoiceActual = fare.getInvoice(userId);
+        CabInvoice cabInvoiceExpected = new CabInvoice(2, 757.5);
+        Assert.assertEquals(cabInvoiceExpected, cabInvoiceActual);
     }
 
     @Test
@@ -90,8 +92,8 @@ public class FareTest {
                          new Rides(RideType.PREMIUM_RIDES, 45.5, 34),
                         };
         fare.addRides(userId, rides);
-        Invoice invoiceActual = fare.getInvoice(userId);
-        Invoice invoiceExpected = new Invoice(4, 1573);
-        Assert.assertEquals(invoiceExpected, invoiceActual);
+        CabInvoice cabInvoiceActual = fare.getInvoice(userId);
+        CabInvoice cabInvoiceExpected = new CabInvoice(4, 1573);
+        Assert.assertEquals(cabInvoiceExpected, cabInvoiceActual);
     }
 }

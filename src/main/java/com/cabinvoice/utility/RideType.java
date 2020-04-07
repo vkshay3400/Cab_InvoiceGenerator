@@ -1,4 +1,4 @@
-package com.cabinvoice;
+package com.cabinvoice.utility;
 
 public enum RideType {
     NORMAL_RIDES(10, 1, 5),
