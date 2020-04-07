@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CabCabFareGeneratorTest {
+public class CabFareGeneratorTest {
     CabFareGenerator fare;
     double totalFare;
 
