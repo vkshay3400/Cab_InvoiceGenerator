@@ -1,13 +1,13 @@
 package com.cabinvoice;
 
 public class Rides {
-    //VARIABLES
-    public double journeyInDistance;
-    public int journeyInTime;
+    public double cabServiceInDistance;
+    public int cabServiceInTime;
+    RideType rideType;
 
-    //METHOD TO GET RIDES
-    public Rides(double journeyInDistance, int journeyInTime) {
-        this.journeyInDistance = journeyInDistance;
-        this.journeyInTime = journeyInTime;
+    public Rides(RideType rideType, double cabServiceInDistance, int cabServiceInTime) {
+        this.rideType = rideType;
+        this.cabServiceInDistance = cabServiceInDistance;
+        this.cabServiceInTime = cabServiceInTime;
     }
 }

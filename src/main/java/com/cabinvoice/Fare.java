@@ -1,6 +1,6 @@
 package com.cabinvoice;
 
-public class CabFare {
+public class Fare {
     //CONSTANTS
     private static double DISTANCE_COST_PER_KILOMETER;
     private static int TRAVEL_COST_PER_MINUTE;
@@ -10,7 +10,7 @@ public class CabFare {
     RideRepository rideRepository = new RideRepository();
 
     //CONSTRUCTOR
-    public CabFare() {
+    public Fare() {
         this.rideRepository = new RideRepository();
     }
 
